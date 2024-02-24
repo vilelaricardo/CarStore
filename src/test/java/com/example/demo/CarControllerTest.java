@@ -54,6 +54,6 @@ class CarControllerTest {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(createdCar, Objects.requireNonNull(responseEntity.getBody()));
 
-        assertEquals(11002.11,createdCar.getPrice());
+        assertEquals(110023.11,createdCar.getPrice());
     }
 }
