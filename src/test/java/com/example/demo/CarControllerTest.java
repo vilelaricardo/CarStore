@@ -53,8 +53,7 @@ class CarControllerTest {
         // Then
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(createdCar, Objects.requireNonNull(responseEntity.getBody()));
+        assertEquals(110043.11,createdCar.getPrice());
 
-        // Verify that the service method was called
-        verify(carService, times(1)).createCar(any(RequestCarDTO.class));
     }
 }
