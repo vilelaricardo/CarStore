@@ -1,11 +1,9 @@
-pipeline{
+pipeline {
     agent any
-
-
-    stages{
-        stage ('init'){
+    stages {
+        stage('Build') { 
             steps {
-                echo 'Teste Jenkins'
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
     }
