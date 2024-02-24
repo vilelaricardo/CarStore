@@ -28,7 +28,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml && curl -X POST -H "Authorization: token ${{ secrets.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 }}" https://api.github.com/repos/vilelaricardo/CarStore/dependency-graph/snapshots
+      run: |
+        mvn -B package --file pom.xml
+        curl -X POST -H "Authorization: token ${{ secrets.GH_TOKEN }}" https://api.github.com/repos/vilelaricardo/CarStore/dependency-graph/snapshots
       
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
