@@ -1,15 +1,12 @@
 pipeline {
     agent any
-        environment {
-        DOCKER_PATH = '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"'
-    }
     tools {
         maven '3.9.6'
     }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn package'
+                bat 'mvn package'
             }
             post {
                 success {
@@ -22,7 +19,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
