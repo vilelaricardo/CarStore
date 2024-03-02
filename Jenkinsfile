@@ -31,7 +31,7 @@ stage('Build Docker Image') {
     steps {
         script {
             def dockerImage
-            def dockerfilePath = "Dockerfile" // Verifique se o nome do arquivo está correto
+            def dockerfilePath = "Dockerfile"
             try {
                 if (fileExists(dockerfilePath)) {
                     dockerImage = bat(returnStdout: true, script: "docker build -t myapp:latest .")
@@ -49,7 +49,7 @@ stage('Build Docker Image') {
         }
     }
 }
-stage('Run Docker Container') {
+stage('Deploy on QA Environment') {
             steps {
                 script {
                     try {
@@ -61,5 +61,18 @@ stage('Run Docker Container') {
                 }
 }
     }
+
+    stage('Deploy on Stage Environment') {
+                steps {
+                    script {
+                        try {
+                            bat "docker run -d -p 8083:8080 myapp:latest"
+                        } catch (Exception e) {
+                            echo "Failed to run Docker container: ${e.message}"
+                            currentBuild.result = 'FAILURE'
+                        }
+                    }
+    }
+        }
 }
 }
