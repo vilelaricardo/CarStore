@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         maven '3.9.6'
-        docker 'docker'
     }
     stages {
         stage('Build') {
@@ -29,12 +28,11 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            environment {
+                dockerImage = docker.build('myapp:latest')
+            }
             steps {
-                script {
-                    def imageName = 'myapp' 
-                    def imageTag = 'latest'
-                    docker.build("$imageName:$imageTag")
-                }
+                echo 'Docker Image built successfully'
             }
         }
     }
