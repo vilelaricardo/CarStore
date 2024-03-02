@@ -49,6 +49,18 @@ stage('Build Docker Image') {
         }
     }
 }
+
+stage('Run Docker Container') {
+            steps {
+                script {
+                    try {
+                        // Execute o comando docker run para iniciar o contêiner
+                        bat "docker run -d -p 8080:8080 myapp:latest"
+                    } catch (Exception e) {
+                        echo "Failed to run Docker container: ${e.message}"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
     }
 }
 
