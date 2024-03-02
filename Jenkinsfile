@@ -49,10 +49,6 @@ stage('Build Docker Image') {
         }
     }
 }
-
-def fileExists(filePath) {
-    return file(filePath).exists()
-}
     }
 }
 
