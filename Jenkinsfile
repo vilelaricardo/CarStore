@@ -1,5 +1,8 @@
 pipeline {
     agent any
+        environment {
+        DOCKER_PATH = '/usr/bin/docker' // caminho completo para o comando docker
+    }
     tools {
         maven '3.9.6'
     }
@@ -27,12 +30,12 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
+stage('Build Docker Image') {
             steps {
                 script {
                     def dockerImage
                     try {
-                        dockerImage = docker.build('myapp:latest')
+                        dockerImage = sh(returnStdout: true, script: "${DOCKER_PATH} build -t myapp:latest .")
                     } catch (Exception e) {
                         echo "Failed to build Docker image: ${e.message}"
                         currentBuild.result = 'FAILURE'
