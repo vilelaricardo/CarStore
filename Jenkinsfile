@@ -28,21 +28,31 @@ pipeline {
             }
         }
 stage('Build Docker Image') {
-            steps {
-                script {
-                    def dockerImage
-                    try {
-                        dockerImage = bat(returnStdout: true, script: "docker build -t myapp:latest .")
-                    } catch (Exception e) {
-                        echo "Failed to build Docker image: ${e.message}"
-                        currentBuild.result = 'FAILURE'
-                    }
-                    if (dockerImage != null) {
-                        echo 'Docker Image built successfully'
-                    }
+    steps {
+        script {
+            def dockerImage
+            def dockerfilePath = "Dockerfile" // Verifique se o nome do arquivo está correto
+            try {
+                if (fileExists(dockerfilePath)) {
+                    dockerImage = bat(returnStdout: true, script: "docker build -t myapp:latest .")
+                } else {
+                    echo "Dockerfile not found at ${dockerfilePath}"
+                    currentBuild.result = 'FAILURE'
                 }
+            } catch (Exception e) {
+                echo "Failed to build Docker image: ${e.message}"
+                currentBuild.result = 'FAILURE'
+            }
+            if (dockerImage != null) {
+                echo 'Docker Image built successfully'
             }
         }
+    }
+}
+
+def fileExists(filePath) {
+    return file(filePath).exists()
+}
     }
 }
 
