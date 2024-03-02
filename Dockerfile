@@ -5,4 +5,4 @@ WORKDIR /app
 COPY target/CarStore-0.0.1-SNAPSHOT.jar /app/CarStore-0.0.1-SNAPSHOT.jar
 
 # Comando para executar o aplicativo quando o contêiner for iniciado
-CMD ["java", "-jar", "myapp.jar"]
+CMD ["java", "-jar", "CarStore-0.0.1-SNAPSHOT.jar"]
