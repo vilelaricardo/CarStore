@@ -1,8 +1,8 @@
-FROM adoptopenjdk/openjdk17:alpine-jre
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY target/myapp.jar /app/myapp.jar
+COPY target/CarStore-0.0.1-SNAPSHOT.jar /app/CarStore-0.0.1-SNAPSHOT.jar
 
 # Comando para executar o aplicativo quando o contêiner for iniciado
 CMD ["java", "-jar", "myapp.jar"]
