@@ -32,7 +32,7 @@ stage('Build Docker Image') {
                 script {
                     def dockerImage
                     try {
-                        dockerImage = sh(returnStdout: true, script: "${DOCKER_PATH} build -t myapp:latest .")
+                        dockerImage = bat(returnStdout: true, script: "docker build -t myapp:latest .")
                     } catch (Exception e) {
                         echo "Failed to build Docker image: ${e.message}"
                         currentBuild.result = 'FAILURE'
