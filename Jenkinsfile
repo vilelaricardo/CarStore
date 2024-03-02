@@ -1,7 +1,7 @@
 pipeline {
     agent any
         environment {
-        DOCKER_PATH = 'C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe'
+        DOCKER_PATH = '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"'
     }
     tools {
         maven '3.9.6'
