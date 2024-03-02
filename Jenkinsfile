@@ -28,11 +28,19 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            environment {
-                dockerImage = docker.build('myapp:latest')
-            }
             steps {
-                echo 'Docker Image built successfully'
+                script {
+                    def dockerImage
+                    try {
+                        dockerImage = docker.build('myapp:latest')
+                    } catch (Exception e) {
+                        echo "Failed to build Docker image: ${e.message}"
+                        currentBuild.result = 'FAILURE'
+                    }
+                    if (dockerImage != null) {
+                        echo 'Docker Image built successfully'
+                    }
+                }
             }
         }
     }
