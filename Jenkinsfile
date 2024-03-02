@@ -49,7 +49,6 @@ stage('Build Docker Image') {
         }
     }
 }
-
 stage('Run Docker Container') {
             steps {
                 script {
@@ -61,6 +60,7 @@ stage('Run Docker Container') {
                         currentBuild.result = 'FAILURE'
                     }
                 }
+}
     }
 }
 
